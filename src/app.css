@@ -1,0 +1,29 @@
+:root {
+	--white: #ffffff;
+	--black: #000000;
+	--tertiary-color: #9cd096;
+	--secondary-color: #83b97f;
+	--primary-color: #7eb087;
+	--green4: #9cd096;
+	--green5: #677f5e;
+}
+
+* {
+	font-family: 'Jetbrains Mono Variable', monospace;
+}
+
+body {
+	min-height: 100vh;
+	margin: 0;
+	background: linear-gradient(
+		180deg,
+		var(--primary-color),
+		var(--secondary-color),
+		var(--tertiary-color)
+	);
+}
+
+h1 {
+	text-align: center;
+	font-size: 2rem;
+}
