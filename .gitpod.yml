@@ -12,3 +12,8 @@ ports:
   - port: 5173
     onOpen: open-browser
 
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
