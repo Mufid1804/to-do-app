@@ -1,17 +1,17 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native"]
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.sqlite"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Todos{
-  id Int @id @default(autoincrement())
+  id String @id @default(dbgenerated("nanoid(10)")) @db.VarChar(10)
   text String
   done Boolean @default(false)
 }
