@@ -1,38 +1,107 @@
-import * as database from '$lib/server/database';
+import { prisma } from "$src/lib/server/prisma";
+import { fail } from "@sveltejs/kit";
+import type { Actions, PageServerLoad } from "./$types";
 
-export function load() {
+export const load: PageServerLoad = async () => {
 	return {
-		todos: database.getTodos()
-	};
-}
+		todos: await prisma.todos.findMany()
+	}
+};
 
-export const actions = {
-	addTodo: async ({ request }) => {
-		const formData = await request.formData();
-		const todo = String(formData.get('text'));
+export const actions: Actions = {
+	createTodo: async ({ request }) => {
+		const { text } = Object.fromEntries(await request.formData()) as {
+			text: string
+		}
 
-		database.addTodo(todo);
+		try {
+			await prisma.todos.create({
+				data: {
+					text
+				}
+			})
+		} catch (err) {
+			console.log(err)
+			return fail(500, { message: "Could not create todo" })
+		}
+
+		return {
+			status: 201
+		}
 	},
 
-	deleteTodo: async ({ request }) => {
-		const data = await request.formData();
+	deleteTodo: async ({ url }) => {
+		const id = url.searchParams.get("id")
+		if (!id) {
+			return fail(400, { message: "Invalid request" })
+		}
 
-		database.deleteTodo(data.get('id'));
+		try {
+			await prisma.todos.delete({
+				where: {
+					id: Number(id)
+				}
+			})
+		} catch (err) {
+			return fail(500, { message: "Something went wrong when deleting todo" })
+		}
+
+		return {
+			status: 200
+		}
 	},
 
-	saveTodo: async ({ url, request }) => {
-		const id = url.searchParams.get('id');
-		const formData = await request.formData();
-		const text = String(formData.get('text'));
+	updateTodo: async ({ url, request }) => {
+		const id = url.searchParams.get("id")
+		if (!id) {
+			return fail(400, { message: "Invalid request" })
+		}
 
-		database.saveTodo(id, text);
+		const { text } = Object.fromEntries(await request.formData()) as { text: string }
+
+		try {
+			await prisma.todos.update({
+				where: {
+					id: Number(id)
+				},
+				data: {
+					text
+				}
+			})
+		} catch (err) {
+			console.log(err)
+			return fail(500, { message: "Could not update todo" })
+		}
+
+		return {
+			status: 200
+		}
 	},
 
 	doneTodo: async ({ url, request }) => {
-		const id = url.searchParams.get('id');
-		const formData = await request.formData();
-		const done = Boolean(formData.get('done'));
+		const id = url.searchParams.get("id")
+		if (!id) {
+			return fail(400, { message: "Invalid request" })
+		}
 
-		database.doneTodo(id, done);
+		const { done } = Object.fromEntries(await request.formData()) as { done: string }		
+
+		try {
+			await prisma.todos.update({
+				where: {
+					id: Number(id)
+				},
+				data: {
+					done: Boolean(done)
+				}
+			})
+		} catch (err) {
+			console.log(err)
+			return fail(500, { message: "Could not check todo" })
+		}
+
+		return {
+			status: 200
+		}
 	}
-};
+}
