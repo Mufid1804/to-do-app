@@ -14,6 +14,10 @@ export const actions: Actions = {
 			text: string
 		}
 
+		if (!text) {
+			return fail(400, { message: "Invalid request" })
+		}
+
 		try {
 			await prisma.todos.create({
 				data: {
@@ -58,6 +62,10 @@ export const actions: Actions = {
 		}
 
 		const { text } = Object.fromEntries(await request.formData()) as { text: string }
+
+		if (!text) {
+			return fail(400, { message: "Invalid request" })
+		}
 
 		try {
 			await prisma.todos.update({
