@@ -1,10 +1,10 @@
 <script lang="ts">
 	import TodoItem from '$lib/todo-item.svelte';
 	import type { PageData } from './$types';
-	
-	export let data: PageData
 
-	$: ({ todos } = data)
+	export let data: PageData;
+
+	$: ({ todos } = data);
 
 	const title = 'To-dos';
 </script>
@@ -23,7 +23,7 @@
 
 	<!-- To-do lists -->
 	{#each todos as todo}
-		<TodoItem {todo}/>
+		<TodoItem {todo} />
 	{/each}
 </div>
 
@@ -31,7 +31,7 @@
 	.todos {
 		width: 100%;
 		max-width: 42rem;
-		margin: 4rem auto 0 auto;
+		margin: 2.5rem auto 0 auto;
 	}
 
 	.new {

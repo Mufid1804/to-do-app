@@ -4,7 +4,7 @@
 
 <div class="todo" class:done={todo.done}>
 	<form action="?/doneTodo&id={todo.id}" method="POST">
-		<input type="hidden" name="done" value={todo.done ? "" : "true"} />
+		<input type="hidden" name="done" value={todo.done ? '' : 'true'} />
 		<button aria-label="Mark todo as {todo.done ? 'not done' : 'done'}" class="toggle" />
 	</form>
 
