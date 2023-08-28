@@ -4,18 +4,17 @@
 
 <div class="todo" class:done={todo.done}>
 	<form action="?/doneTodo&id={todo.id}" method="POST">
-		<input type="hidden" name="done" value={todo.done ? '' : 'true'} />
+		<input type="hidden" name="done" value={todo.done ? "" : "true"} />
 		<button aria-label="Mark todo as {todo.done ? 'not done' : 'done'}" class="toggle" />
 	</form>
 
-	<form action="?/saveTodo&id={todo.id}" method="POST" class="text">
+	<form action="?/updateTodo&id={todo.id}" method="POST" class="text">
 		<input type="text" name="text" value={todo.text} />
 		<button aria-label="Save to-do" class="save" />
 	</form>
 
-	<form action="?/deleteTodo" method="POST">
-		<input type="hidden" name="id" value={todo.id} />
-		<button aria-label="Delete to-do" class="delete" />
+	<form action="?/deleteTodo&id={todo.id}" method="POST">
+		<button type="submit" aria-label="Delete to-do" class="delete" />
 	</form>
 </div>
 

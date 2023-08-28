@@ -1,7 +1,10 @@
 <script lang="ts">
 	import TodoItem from '$lib/todo-item.svelte';
+	import type { PageData } from './$types';
+	
+	export let data: PageData
 
-	export let data;
+	$: ({ todos } = data)
 
 	const title = 'To-dos';
 </script>
@@ -14,13 +17,13 @@
 
 <div class="todos">
 	<!-- Input form -->
-	<form method="post" action="?/addTodo" class="new">
+	<form method="post" action="?/createTodo" class="new">
 		<input type="text" name="text" aria-label="Add a to-dos" placeholder="+ type to add a to-do" />
 	</form>
 
 	<!-- To-do lists -->
-	{#each data.todos as todo (todo.id)}
-		<TodoItem {todo} />
+	{#each todos as todo}
+		<TodoItem {todo}/>
 	{/each}
 </div>
 
