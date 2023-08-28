@@ -11,22 +11,22 @@
 @font-face {
 	font-family: 'Jetbrains Mono';
 	src: url(/fonts/jetbrains-mono-latin-300-normal.woff);
-	font-weight: normal;
+	font-weight: 100 300;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'Jetbrains Mono';
 	src: url(/fonts/jetbrains-mono-latin-400-normal.woff);
-	font-weight: bold;
+	font-weight: 400 600;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'Jetbrains Mono';
 	src: url(/fonts/jetbrains-mono-latin-500-normal.woff);
-	font-weight: normal;
-	font-style: bolder;
+	font-weight: 700 900;
+	font-style: normal;
 }
 
 * {
@@ -46,5 +46,10 @@ body {
 
 h1 {
 	text-align: center;
-	font-size: 2rem;
+	font-size: 3rem;
+	font-weight: 900;
+}
+
+button {
+	cursor: pointer;
 }

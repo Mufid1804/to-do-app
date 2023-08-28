@@ -31,7 +31,7 @@
 	.todos {
 		width: 100%;
 		max-width: 42rem;
-		margin: 4rem auto 0 auto;
+		margin: 2.5rem auto 0 auto;
 	}
 
 	.new {
