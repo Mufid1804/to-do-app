@@ -1,15 +1,20 @@
-<div class="todo">
-	<form action="" method="">
-		<input type="hidden" name="done" value="" />
-		<button aria-label="Mark done/not done" class="toggle" />
+<script lang="ts">
+	export let todo: any;
+</script>
+
+<div class="todo" class:done={todo.done}>
+	<form action="?/doneTodo&id={todo.id}" method="POST">
+		<input type="hidden" name="done" value={todo.done ? '' : 'true'} />
+		<button aria-label="Mark todo as {todo.done ? 'not done' : 'done'}" class="toggle" />
 	</form>
 
-	<form action="" method="" class="text">
-		<input type="text" />
+	<form action="?/saveTodo&id={todo.id}" method="POST" class="text">
+		<input type="text" name="text" value={todo.text} />
 		<button aria-label="Save to-do" class="save" />
 	</form>
 
-	<form action="" method="">
+	<form action="?/deleteTodo" method="POST">
+		<input type="hidden" name="id" value={todo.id} />
 		<button aria-label="Delete to-do" class="delete" />
 	</form>
 </div>
@@ -82,14 +87,13 @@
 		opacity: 1;
 	}
 
-	/* TODO: Uncomment when API available
-    .done {
-      transform: none;
-      opacity: 0.4;
-      filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.1));
-    }  
+	.done {
+		transform: none;
+		opacity: 0.4;
+		filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.1));
+	}
 
-    .done .toggle {
-      background-image: url("data:image/svg+xml,%3Csvg width='22' height='16' viewBox='0 0 22 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5 1.5L7.4375 14.5L1.5 8.5909' stroke='%23676778' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    } */
+	.done .toggle {
+		background-image: url("data:image/svg+xml,%3Csvg width='22' height='16' viewBox='0 0 22 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5 1.5L7.4375 14.5L1.5 8.5909' stroke='%23676778' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+	}
 </style>
