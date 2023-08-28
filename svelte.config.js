@@ -14,8 +14,8 @@ const config = {
 		adapter: adapter(),
 
 		csrf: {
-			checkOrigin: false,
-		  },
+			checkOrigin: false
+		},
 
 		alias: {
 			$src: './src'

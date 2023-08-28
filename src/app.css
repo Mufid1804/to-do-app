@@ -8,8 +8,29 @@
 	--green5: #677f5e;
 }
 
+@font-face {
+	font-family: 'Jetbrains Mono';
+	src: url(/fonts/jetbrains-mono-latin-300-normal.woff);
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Jetbrains Mono';
+	src: url(/fonts/jetbrains-mono-latin-400-normal.woff);
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Jetbrains Mono';
+	src: url(/fonts/jetbrains-mono-latin-500-normal.woff);
+	font-weight: normal;
+	font-style: bolder;
+}
+
 * {
-	font-family: monospace;
+	font-family: 'Jetbrains Mono', monospace;
 }
 
 body {

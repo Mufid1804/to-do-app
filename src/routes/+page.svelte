@@ -19,8 +19,8 @@
 	</form>
 
 	<!-- To-do lists -->
-	{#each data.todos as todo}
-	<TodoItem {todo}/>
+	{#each data.todos as todo (todo.id)}
+		<TodoItem {todo} />
 	{/each}
 </div>
 

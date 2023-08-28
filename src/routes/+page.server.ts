@@ -1,26 +1,38 @@
-import { fail } from '@sveltejs/kit'
+import * as database from '$lib/server/database';
 
-// TODO: persist in database
-import { addTodo, getTodos } from '$lib/server/data';
-
-export async function load() {
-  const todos = getTodos()
-  return { todos }
+export function load() {
+	return {
+		todos: database.getTodos()
+	};
 }
 
-
 export const actions = {
-    addTodo: async ({ request }) => {
-      const formData = await request.formData();
-      const todo = String(formData.get("text"))
+	addTodo: async ({ request }) => {
+		const formData = await request.formData();
+		const todo = String(formData.get('text'));
 
-      if (!todo) {
-        return fail(400, { todo, missing: true })
-      }
+		database.addTodo(todo);
+	},
 
-      addTodo(todo)
-      
-      return {success: true};
-  }
+	deleteTodo: async ({ request }) => {
+		const data = await request.formData();
+
+		database.deleteTodo(data.get('id'));
+	},
+
+	saveTodo: async ({ url, request }) => {
+		const id = url.searchParams.get('id');
+		const formData = await request.formData();
+		const text = String(formData.get('text'));
+
+		database.saveTodo(id, text);
+	},
+
+	doneTodo: async ({ url, request }) => {
+		const id = url.searchParams.get('id');
+		const formData = await request.formData();
+		const done = Boolean(formData.get('done'));
+
+		database.doneTodo(id, done);
+	}
 };
-
