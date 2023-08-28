@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import TodoItem from '$lib/todo-item.svelte';
 	import type { PageData } from './$types';
 
@@ -17,7 +18,7 @@
 
 <div class="todos">
 	<!-- Input form -->
-	<form method="post" action="?/createTodo" class="new">
+	<form method="post" action="?/createTodo" class="new" use:enhance>
 		<input type="text" name="text" aria-label="Add a to-dos" placeholder="+ type to add a to-do" />
 	</form>
 
