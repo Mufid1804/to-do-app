@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import TodoItem from '$lib/todo-item.svelte';
+	import TodoItem from '$lib/components/todo-item.svelte';
 	import type { PageData } from './$types';
-
+	
 	export let data: PageData;
-
+	
 	$: ({ todos } = data);
 
 	const title = 'To-dos';

@@ -56,6 +56,7 @@ export const actions: Actions = {
 	},
 
 	updateTodo: async ({ url, request }) => {
+		
 		const id = url.searchParams.get('id');
 		if (!id) {
 			return fail(400, { message: 'Invalid request' });
